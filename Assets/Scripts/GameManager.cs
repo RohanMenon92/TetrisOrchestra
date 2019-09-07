@@ -12,12 +12,12 @@ public class GameManager : MonoBehaviour {
 
     public Transform SpawnLocation;
     
-    public List<PieceScript> SBlockArray = new List<PieceScript>();
-    public List<PieceScript> ReverseSBlockArray = new List<PieceScript>();
-    public List<PieceScript> ReverseJBlockArray = new List<PieceScript>();
-    public List<PieceScript> LBlockArray = new List<PieceScript>();
-    public List<PieceScript> SquareBlockArray = new List<PieceScript>();
-    public List<PieceScript> TBlockArray = new List<PieceScript>();
+    List<PieceScript> SBlockArray = new List<PieceScript>();
+    List<PieceScript> ReverseSBlockArray = new List<PieceScript>();
+    List<PieceScript> ReverseJBlockArray = new List<PieceScript>();
+    List<PieceScript> LBlockArray = new List<PieceScript>();
+    List<PieceScript> SquareBlockArray = new List<PieceScript>();
+    List<PieceScript> TBlockArray = new List<PieceScript>();
 
     // Start is called before the first frame update
     void Start()
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour {
             break;
         }
 
-     
+        pieceTospawn.OnSpawn();
 
         // TODO LATER: Set Material Properties
 
