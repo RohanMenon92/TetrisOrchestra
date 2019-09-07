@@ -26,11 +26,11 @@ public class GameManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
+        GameObject newObject = null;
         // Instantiate S Block 
         for(int i = 0; i<50; i++) {
-
-            GameObject newObject = Instantiate(SBlockPrefab);
-
+            newObject = Instantiate(SBlockPrefab);
+            newObject.transform.position = new Vector3(1000F, 1000f, 0f);
             SBlockArray.Add(newObject.GetComponent<PieceScript>());
 
             newObject = Instantiate(ReverseSBlockPrefab);
@@ -52,8 +52,6 @@ public class GameManager : MonoBehaviour {
             newObject = Instantiate(TBlockPrefab);
             newObject.transform.position = new Vector3(1000F, 1000f, 0f);
             TBlockArray.Add(newObject.GetComponent<PieceScript>());
-            
-
         }
 
         // Do for all pieces

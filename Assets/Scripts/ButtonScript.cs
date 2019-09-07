@@ -4,12 +4,24 @@ using UnityEngine;
 
 public class ButtonScript : MonoBehaviour
 {
-    private int ButtonIdentifier;
+    public int buttonIdentifier;
     private InputController inputController;
     // Start is called before the first frame update
     void Start()
     {
         inputController = FindObjectOfType<InputController>();
+    }
+
+    void OnMouseDown() {
+        inputController.OnDown(buttonIdentifier);    
+    }
+
+    void OnMouseUp() {
+        inputController.OnUp(buttonIdentifier);
+    }
+
+    void OnMouseDrag() {
+        inputController.OnDrag(buttonIdentifier);
     }
 
     // Update is called once per frame
