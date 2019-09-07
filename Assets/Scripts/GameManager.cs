@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace MusicalTowers {
+
 public class GameManager : MonoBehaviour
 {
     public GameObject SBlockPrefab;
 
-    public List<PieceScript> SBlockArray = new List<PiececScript>;
+    public List<GameObject> SBlockArray = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
         // Instantiate S Block 
-        for(i = 0; i<100; i++) {
+        for(int i = 0; i<100; i++) {
             GameObject newObject = Instantiate(SBlockPrefab);
             SBlockArray.Add(newObject);
         }
@@ -24,7 +26,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetkeyDown("space")) {
+        if(Input.GetKeyDown("space")) {
             SpawnPiece();
         }   
     }
@@ -32,9 +34,9 @@ public class GameManager : MonoBehaviour
 
     void SpawnPiece() {
         // Select Random Piece to spawn
-        int pieceNumber = Math.Floor(Random.Range(0, 6));
+        float pieceNumber = Mathf.Floor(Random.Range(0, 6));
 
-        switch(pieceNumber) {
+        switch((int)pieceNumber) {
             case 0:
             // Spawn Block 1
             break;
@@ -58,4 +60,5 @@ public class GameManager : MonoBehaviour
         // TODO LATER: Set Material Properties
 
     }
+}
 }
