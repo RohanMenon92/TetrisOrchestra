@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour {
     public PieceScript currentPiece;
 
     public int Score;
+    public int Lives = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -155,5 +156,26 @@ public class GameManager : MonoBehaviour {
         pieceTospawn.transform.position = SpawnLocation.position;
 
         currentPiece = pieceTospawn;
+    }
+
+    public void DeletePiece(PieceScript piece)
+    {
+        piece.transform.position = new Vector3(1000F, -1000f, 0f);
+
+        Lives--;
+
+        if(Lives == 0)
+        {
+            // END GAME
+            Debug.Log("END THE FUCKEN GAME!!!!!!!!!!");
+        } else
+        {
+            currentPiece = null;
+
+            if(!piece.isPlaced)
+            {
+                SpawnPiece();
+            }
+        }
     }
 }

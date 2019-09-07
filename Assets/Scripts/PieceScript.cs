@@ -12,7 +12,10 @@ public class PieceScript : MonoBehaviour
     public bool isPlaced = false;
     public int BlockIdentifier;
 
-    float speed = 0.05f;
+    public float changeValueX;
+    public float changeValueY;
+
+    float defaultSpeed = -0.075f;
 
     // Start is called before the first frame update
     void Start()
@@ -30,18 +33,24 @@ public class PieceScript : MonoBehaviour
     void Update()
     {
         if(isSpawned && !isPlaced) {
-            transform.position = new Vector3(transform.position.x, transform.position.y - speed, transform.position.z);
+            transform.position = new Vector3(transform.position.x + changeValueX, transform.position.y + defaultSpeed + changeValueY, transform.position.z);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if(isPlaced) {
+        if (other.transform.GetComponent<DeathZone>() != null)
+        {
+            DeletePiece();
+        }
+
+        if (isPlaced) {
             return;
         }
 
         // Check if the collision object is a piece script
         if(other.transform.GetComponent<PieceScript>() != null || other.transform.GetComponent<GroundScript>() != null) {
             OnPlacement();
+            return;
         }
     }
 
@@ -59,6 +68,11 @@ public class PieceScript : MonoBehaviour
         
     }
 
+    public void DeletePiece()
+    {
+        gameManager.DeletePiece(this);
+    }
+
     public void OnPlacement() {
         isPlaced = true;
         rigidBody2D.bodyType = RigidbodyType2D.Dynamic;
@@ -71,9 +85,5 @@ public class PieceScript : MonoBehaviour
         collider2D.enabled = true;
 
         rigidBody2D.bodyType = RigidbodyType2D.Kinematic;
-    }
-
-    public void OnDespawn() {
-        // Add it back to gameManager Pool
     }
 }

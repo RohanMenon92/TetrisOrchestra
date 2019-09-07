@@ -13,7 +13,7 @@ public class ButtonScript : MonoBehaviour
     }
 
     void OnMouseDown() {
-        inputController.OnDown(buttonIdentifier);    
+        inputController.OnDown(buttonIdentifier, Input.mousePosition);
     }
 
     void OnMouseUp() {
