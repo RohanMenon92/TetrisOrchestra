@@ -81,21 +81,64 @@ public class GameManager : MonoBehaviour {
             // Spawn Block 1
             break;
             case 1:
+                foreach(PieceScript reversesBlock in ReverseSBlockArray)
+                {
+                    if(!reversesBlock.isSpawned)
+                    {
+                        pieceTospawn = reversesBlock;
+                        break;
+                    }
+                }
             // Spawn Block 2
             break;
             case 2:
+                foreach(PieceScript lblock in LBlockArray)
+                {
+                    if(!lblock.isSpawned)
+                    {
+                        pieceTospawn = lblock;
+                        break;
+                    }
+                }
             // Spawn Block 3
             break;
             case 3:
+                foreach(PieceScript squareBlock in SquareBlockArray)
+                {
+                    if(!squareBlock.isSpawned)
+                    {
+                        pieceTospawn = squareBlock;
+                        break;
+                    }
+
+                }
             // ...
             break;
             case 4:
+                foreach(PieceScript tBlock in TBlockArray)
+                {
+                    if(!tBlock.isSpawned)
+                    {
+                        pieceTospawn = tBlock;
+                        break;
+                    }
+                }
             // ...
             break;
             case 5:
+                foreach(PieceScript reverseJblock in ReverseJBlockArray)
+                {
+                    if(!reverseJblock.isSpawned)
+                    {
+                        pieceTospawn = reverseJblock;
+                        break;
+                    }
+                }
             // ...
             break;
         }
+
+     
 
         // TODO LATER: Set Material Properties
 
