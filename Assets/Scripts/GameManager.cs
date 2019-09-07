@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour {
     public List<PieceScript> SquareBlockArray = new List<PieceScript>();
     public List<PieceScript> TBlockArray = new List<PieceScript>();
 
+    private PieceScript currentPiece;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +63,10 @@ public class GameManager : MonoBehaviour {
         }   
     }
     
+    public void PiecePlaced(PieceScript piece) {
+        currentPiece = null;
+        SpawnPiece();
+    }
 
     void SpawnPiece() {
         // Select Random Piece to spawn
@@ -138,9 +144,10 @@ public class GameManager : MonoBehaviour {
             break;
         }
 
-     
-
         // TODO LATER: Set Material Properties
-
+        
+        
+        pieceTospawn.OnSpawn();
+        currentPiece = pieceTospawn;
     }
 }
