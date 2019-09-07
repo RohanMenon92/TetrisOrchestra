@@ -32,18 +32,23 @@ public class GameManager : MonoBehaviour {
             SBlockArray.Add(newObject.GetComponent<PieceScript>());
 
             newObject = Instantiate(ReverseSBlockPrefab);
+            newObject.transform.position = new Vector3(1000F, 1000f, 0f);
             ReverseSBlockArray.Add(newObject.GetComponent<PieceScript>());
 
             newObject = Instantiate(ReverseJBlockPrefab);
+            newObject.transform.position = new Vector3(1000F, 1000f, 0f);
             ReverseJBlockArray.Add(newObject.GetComponent<PieceScript>());
 
             newObject = Instantiate(LBlockPrefab);
+            newObject.transform.position = new Vector3(1000F, 1000f, 0f);
             LBlockArray.Add(newObject.GetComponent<PieceScript>());
 
             newObject = Instantiate(SquareBlockPrefab);
+            newObject.transform.position = new Vector3(1000F, 1000f, 0f);
             SquareBlockArray.Add(newObject.GetComponent<PieceScript>());
 
             newObject = Instantiate(TBlockPrefab);
+            newObject.transform.position = new Vector3(1000F, 1000f, 0f);
             TBlockArray.Add(newObject.GetComponent<PieceScript>());
             
 
@@ -58,7 +63,8 @@ public class GameManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown("space")) {
+        if(Input.GetKeyDown(KeyCode.A)) {
+            Debug.Log("iT WORKS");
             SpawnPiece();
         }   
     }
@@ -143,9 +149,11 @@ public class GameManager : MonoBehaviour {
             // ...
             break;
         }
-        
-        
+
         pieceTospawn.OnSpawn();
+
+        pieceTospawn.transform.position = SpawnLocation.position;
+
         currentPiece = pieceTospawn;
     }
 }
