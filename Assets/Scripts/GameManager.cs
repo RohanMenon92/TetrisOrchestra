@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MusicalTowers {
-
-public class GameManager : MonoBehaviour
-{
+public class GameManager : MonoBehaviour {
     public GameObject SBlockPrefab;
 
     public List<GameObject> SBlockArray = new List<GameObject>();
@@ -60,5 +57,4 @@ public class GameManager : MonoBehaviour
         // TODO LATER: Set Material Properties
 
     }
-}
 }

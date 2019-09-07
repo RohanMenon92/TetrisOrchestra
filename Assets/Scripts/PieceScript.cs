@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MusicalTowers {
-
 public class PieceScript : MonoBehaviour
 {
     private Rigidbody2D rigidBody2D;
@@ -35,5 +33,4 @@ public class PieceScript : MonoBehaviour
     void OnDespawn() {
         // Add it back to gameManager Pool
     }
-}
 }
