@@ -9,7 +9,7 @@ public class PieceScript : MonoBehaviour
     private GameManager gameManager;
 
     public bool isSpawned = false;
-
+    public bool isPlaced = false;
     public int BlockIdentifier;
 
 
@@ -29,19 +29,40 @@ public class PieceScript : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        
+        if(isPlaced) {
+            return;
+        }
+        // Check if the collision object is a piece script
+        if(other.transform.GetComponent<PieceScript>() != null) {
+            OnPlacement();
+        }
     }
 
     private void OnCollisionExit2D(Collision2D other) {
+        if(isPlaced) {
+            return;
+        }
         
     }
 
     private void OnCollisionStay2D(Collision2D other) {
+        if(isPlaced) {
+            return;
+        }
         
-    } 
+    }
+
+    public void OnPlacement() {
+        isPlaced = true;
+        rigidBody2D.isKinematic = false;
+
+        gameManager.PiecePlaced(this);
+    }
 
     public void OnSpawn() {
         isSpawned = true;
+
+        rigidBody2D.isKinematic = true;
     }
 
     public void OnDespawn() {
