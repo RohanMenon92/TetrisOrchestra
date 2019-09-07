@@ -8,6 +8,8 @@ public class PieceScript : MonoBehaviour
     private Collider2D collider2D;
     private GameManager gameManager;
 
+    public bool isSpawned = false;
+
     public int BlockIdentifier;
 
 
