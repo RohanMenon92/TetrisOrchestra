@@ -28,11 +28,23 @@ public class PieceScript : MonoBehaviour
         
     }
 
-    void OnSpawn() {
-
+    private void OnCollisionEnter2D(Collision2D other) {
+        
     }
 
-    void OnDespawn() {
+    private void OnCollisionExit2D(Collision2D other) {
+        
+    }
+
+    private void OnCollisionStay2D(Collision2D other) {
+        
+    } 
+
+    public void OnSpawn() {
+        isSpawned = true;
+    }
+
+    public void OnDespawn() {
         // Add it back to gameManager Pool
     }
 }
