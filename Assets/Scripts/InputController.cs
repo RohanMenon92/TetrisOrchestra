@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class InputController : MonoBehaviour
 {
+    public SpriteRenderer bgRenderer;
+
     private GameManager gameManager;
 
     int currentButtonPress;
@@ -17,9 +20,10 @@ public class InputController : MonoBehaviour
 
     public void OnDown(int buttonNumber) {
         currentButtonPress = buttonNumber;
+
         switch (buttonNumber) {
             case 0:
-                Debug.Log("OnDown 0");
+                Debug.Log("OnDown 0" + gameManager.currentPiece);
             break;
             case 1:
                 Debug.Log("OnDown 1");
