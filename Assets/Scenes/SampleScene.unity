@@ -281,8 +281,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: b3b6c7b3126696b4db3edb69f4b92165, type: 3}
-    m_FontSize: 111
+    m_Font: {fileID: 12800000, guid: 5de196bdc2ea75f4c981448af1e5e91d, type: 3}
+    m_FontSize: 54
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
@@ -293,7 +293,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Lives:'
+  m_Text: 
 --- !u!222 &157810772
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -832,19 +832,19 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: b3b6c7b3126696b4db3edb69f4b92165, type: 3}
-    m_FontSize: 111
+    m_Font: {fileID: 12800000, guid: 5de196bdc2ea75f4c981448af1e5e91d, type: 3}
+    m_FontSize: 52
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 5
-    m_MaxSize: 121
+    m_MinSize: 0
+    m_MaxSize: 127
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Score: '
+  m_Text: 
 --- !u!222 &430929607
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1870,9 +1870,13 @@ MonoBehaviour:
     type: 3}
   TBlockPrefab: {fileID: 1732287332762532, guid: 026ce1bb2fe77884882950408db995e3,
     type: 3}
+  EndCredits: {fileID: 0}
+  MainUi: {fileID: 0}
   SpawnLocation: {fileID: 2094881454}
   inputController: {fileID: 0}
   currentPiece: {fileID: 0}
+  ScoreText: {fileID: 430929606}
+  LivesText: {fileID: 157810771}
   Score: 0
   Lives: 5
 --- !u!4 &1257786563

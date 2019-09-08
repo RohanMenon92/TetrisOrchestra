@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     public GameObject SBlockPrefab;
@@ -9,6 +10,9 @@ public class GameManager : MonoBehaviour {
     public GameObject LBlockPrefab;
     public GameObject SquareBlockPrefab;
     public GameObject TBlockPrefab;
+
+    public GameObject EndCredits;
+    public GameObject MainUi;
 
     public Transform SpawnLocation;
     
@@ -23,11 +27,14 @@ public class GameManager : MonoBehaviour {
 
     public PieceScript currentPiece;
 
-    public int Score;
-    public int Lives = 5;
+    public Text ScoreText;
+    public Text LivesText;
+    public int Score = 1;
+    public int Lives = 3;
     // Start is called before the first frame update
     void Start()
     {
+
         GameObject newObject = null;
         // Instantiate S Block 
         for(int i = 0; i<50; i++) {
@@ -73,6 +80,18 @@ public class GameManager : MonoBehaviour {
     
     public void PiecePlaced(PieceScript piece) {
         inputController.KillRotationTween();
+        int scoreIncrement = 0;
+        if (currentPiece.transform.position.y < 0)
+        {
+            scoreIncrement = 1;
+        }
+        else
+        {
+            scoreIncrement = (int)Mathf.Floor(currentPiece.transform.position.y);
+        }
+
+        Score += scoreIncrement;
+        ScoreText.text = "Score :  " + Score;
         currentPiece = null;
         SpawnPiece();
     }
@@ -165,11 +184,14 @@ public class GameManager : MonoBehaviour {
         piece.transform.position = new Vector3(1000F, -1000f, 0f);
 
         Lives--;
+        LivesText.text = "Lives : " + Lives;
 
         if(Lives == 0)
         {
             // END GAME
             Debug.Log("END THE FUCKEN GAME!!!!!!!!!!");
+
+            EndCredits.active = true;
         } else
         {
             currentPiece = null;
