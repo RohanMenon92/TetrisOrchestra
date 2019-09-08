@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
     List<PieceScript> SquareBlockArray = new List<PieceScript>();
     List<PieceScript> TBlockArray = new List<PieceScript>();
 
+    public InputController inputController;
 
     public PieceScript currentPiece;
 
@@ -55,6 +56,7 @@ public class GameManager : MonoBehaviour {
             TBlockArray.Add(newObject.GetComponent<PieceScript>());
         }
 
+        inputController = FindObjectOfType<InputController>();
         // Do for all pieces
     
     }
@@ -65,12 +67,12 @@ public class GameManager : MonoBehaviour {
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.A)) {
-            Debug.Log("iT WORKS");
             SpawnPiece();
         }   
     }
     
     public void PiecePlaced(PieceScript piece) {
+        inputController.KillRotationTween();
         currentPiece = null;
         SpawnPiece();
     }
