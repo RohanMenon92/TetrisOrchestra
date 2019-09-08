@@ -33,7 +33,15 @@ public class PieceScript : MonoBehaviour
     void Update()
     {
         if(isSpawned && !isPlaced) {
-            transform.position = new Vector3(transform.position.x + changeValueX, transform.position.y + defaultSpeed + changeValueY, transform.position.z);
+            float newValueX = transform.position.x;
+            float newXValueToSet = transform.position.x + changeValueX;
+            if (newXValueToSet < 4.4f && newXValueToSet > -4.4f)
+            {
+                newValueX = newXValueToSet;
+            }
+
+
+            transform.position = new Vector3(newValueX, transform.position.y + defaultSpeed + changeValueY, transform.position.z);
         }
     }
 
