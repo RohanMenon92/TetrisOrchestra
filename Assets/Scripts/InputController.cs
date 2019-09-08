@@ -38,14 +38,22 @@ public class InputController : MonoBehaviour
         switch (buttonNumber) {
             case 0:
                 // Controls Speed Downwards
-
+                audio1.volume = 0f;
+                audio1.Play();
+                audio1.DOFade(0.8f, 0.25f);
             break;
             case 1:
                 // Controls Left and Right
+                audio2.volume = 0f;
+                audio2.Play();
+                audio2.DOFade(0.8f, 0.25f);
 
-            break;
+                break;
             case 2:
                 // For Rotation
+                audio3.volume = 0f;
+                audio3.Play();
+                audio3.DOFade(0.8f, 0.25f);
                 stopRotation = false;
                 rotationTween = gameManager.currentPiece.transform.DORotate(new Vector3(0f, 0f, rotationVal * 90f), 0.3f, RotateMode.LocalAxisAdd)
                     .SetEase(Ease.InOutQuad)
@@ -75,12 +83,22 @@ public class InputController : MonoBehaviour
     public void OnUp(int buttonNumber) {
         switch (currentButtonPress) {
             case 0:
-                //Debug.Log("OnUp 0");            
-            break;
+                audio1.DOFade(0f, 0.25f).OnComplete(() =>
+                {
+                    audio1.Stop();
+                });
+                break;
             case 1:
-                //Debug.Log("OnUp 1");
-            break;
+                audio2.DOFade(0f, 0.25f).OnComplete(() =>
+                {
+                    audio2.Stop();
+                });
+                break;
             case 2:
+                audio3.DOFade(0f, 0.25f).OnComplete(() =>
+                {
+                    audio3.Stop();
+                });
                 stopRotation = true;
                 rotationTween.OnStepComplete(KillRotationTween);
             break;
@@ -107,19 +125,25 @@ public class InputController : MonoBehaviour
                 {
                     if(Mathf.Abs(touchDifferenceY) < 100f)
                     {
-                        changeValue = - 0.025f;
+                        changeValue = - 0.125f;
                     } else {
-                        changeValue = - 0.045f;
+                        changeValue = - 0.225f;
                     }
                 } else {
                     if (Mathf.Abs(touchDifferenceY) < 100f)
                     {
-                        changeValue = 0.015f;
+                        changeValue = 0.15f;
                     }
                     else
                     {
-                        changeValue = 0.035f;
+                        changeValue = 0.35f;
                     }
+                }
+
+                // Change every 10 frames and duration of pitch change is 1/6 from that value
+                if(Time.frameCount%10 == 0)
+                {
+                    audio1.DOPitch(1f + (-changeValue), 0.167f).SetEase(Ease.InOutBack);
                 }
 
                 gameManager.currentPiece.changeValueY = changeValue;
@@ -127,7 +151,14 @@ public class InputController : MonoBehaviour
             case 1:
                 // For Side to Side Speed
                 float touchDifferenceX = currentButtonPosition.x - Input.mousePosition.x;
-                changeValue = touchDifferenceX * -0.0005f;
+                changeValue = touchDifferenceX * -0.005f;
+
+                // Change every 10 frames and duration of pitch change is 1/6  from that value
+                if (Time.frameCount % 10 == 0)
+                {
+                    audio2.DOPitch(1.1f + (changeValue * 0.2f), 0.167f);
+                }
+
 
                 gameManager.currentPiece.changeValueX = changeValue;
                 break;
@@ -141,6 +172,11 @@ public class InputController : MonoBehaviour
                 else
                 {
                     rotationVal = -1;
+                }
+
+                if (Time.frameCount % 10 == 0)
+                {
+                    audio3.DOPitch((rotationVal * 0.01f) + 1f, 0.167f).SetEase(Ease.InOutBack);
                 }
 
                 break;

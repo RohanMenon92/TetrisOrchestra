@@ -15,7 +15,7 @@ public class PieceScript : MonoBehaviour
     public float changeValueX;
     public float changeValueY;
 
-    float defaultSpeed = -0.075f;
+    float defaultSpeed = -0.375f;
 
     // Start is called before the first frame update
     void Start()
@@ -32,17 +32,22 @@ public class PieceScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isSpawned && !isPlaced) {
-            float newValueX = transform.position.x;
-            float newXValueToSet = transform.position.x + changeValueX;
-            if (newXValueToSet < 4.4f && newXValueToSet > -4.4f)
+        if(Time.frameCount%30 == 0)
+        {
+            if (isSpawned && !isPlaced)
             {
-                newValueX = newXValueToSet;
+                float newValueX = transform.position.x;
+                float newXValueToSet = (transform.position.x + changeValueX);
+                if (newXValueToSet < 4.5f && newXValueToSet > -4.5f)
+                {
+                    newValueX = newXValueToSet;
+                }
+
+
+                transform.position = new Vector3(newValueX, (transform.position.y + defaultSpeed + changeValueY), transform.position.z);
             }
-
-
-            transform.position = new Vector3(newValueX, transform.position.y + defaultSpeed + changeValueY, transform.position.z);
         }
+
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
