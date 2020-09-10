@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,9 +14,11 @@ public class GameManager : MonoBehaviour {
     public GameObject TBlockPrefab;
 
     public GameObject EndCredits;
-    public GameObject MainUi;
 
     public Transform SpawnLocation;
+
+    public GameObject buttonHolder;
+    public GameObject realGround;
     
     List<PieceScript> SBlockArray = new List<PieceScript>();
     List<PieceScript> ReverseSBlockArray = new List<PieceScript>();
@@ -27,9 +31,9 @@ public class GameManager : MonoBehaviour {
 
     public PieceScript currentPiece;
 
-    public Text ScoreText;
-    public Text LivesText;
-    public int Score = 1;
+    public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI LivesText;
+    public int Score = 0;
     public int Lives = 3;
     // Start is called before the first frame update
     void Start()
@@ -37,7 +41,7 @@ public class GameManager : MonoBehaviour {
 
         GameObject newObject = null;
         // Instantiate S Block 
-        for(int i = 0; i<50; i++) {
+        for(int i = 0; i<200; i++) {
             newObject = Instantiate(SBlockPrefab);
             newObject.transform.position = new Vector3(1000F, 1000f, 0f);
             SBlockArray.Add(newObject.GetComponent<PieceScript>());
@@ -65,33 +69,42 @@ public class GameManager : MonoBehaviour {
 
         inputController = FindObjectOfType<InputController>();
         // Do for all pieces
-    
+
+
+        BeginTheGame();
     }
 
-  
+    void BeginTheGame()
+    {
+        realGround.transform.DOMove(new Vector3(0f, -4f, 0f), 0.25f);
+        buttonHolder.transform.DOMove(new Vector3(0f, 0.5f, 3f), 0.5f).OnComplete(() =>
+        {
+            SpawnPiece();
+        });
+    }
 
     // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.A)) {
-            SpawnPiece();
-        }   
+    void Update() {
     }
     
     public void PiecePlaced(PieceScript piece) {
         inputController.KillRotationTween();
         int scoreIncrement = 0;
-        if (currentPiece.transform.position.y < 0)
+        if(currentPiece != null)
         {
-            scoreIncrement = 1;
-        }
-        else
-        {
-            scoreIncrement = (int)Mathf.Floor(currentPiece.transform.position.y);
+            if (currentPiece.transform.position.y < 0)
+            {
+                scoreIncrement = 1;
+            }
+            else
+            {
+                scoreIncrement = (int)Mathf.Floor(currentPiece.transform.position.y);
+            }
+
         }
 
         Score += scoreIncrement;
-        ScoreText.text = "Score :  " + Score;
+        ScoreText.text = "Score : " + Score;
         currentPiece = null;
         SpawnPiece();
     }
@@ -188,12 +201,12 @@ public class GameManager : MonoBehaviour {
 
         if(Lives == 0)
         {
-            // END GAME
-            Debug.Log("END THE FUCKEN GAME!!!!!!!!!!");
-
-            EndCredits.active = true;
-        } else
-        {
+            if(PlayerPrefs.GetInt("HighScore") < Score)
+            {
+                PlayerPrefs.SetInt("HighScore", Score);
+            }
+            EndCredits.SetActive(true);
+        } else {
             currentPiece = null;
 
             if(!piece.isPlaced)

@@ -121,22 +121,23 @@ public class InputController : MonoBehaviour
             case 0:
                 // For Up and Down Speed
                 float touchDifferenceY = currentButtonPosition.y - Input.mousePosition.y;
+                Debug.Log(touchDifferenceY);
                 if (touchDifferenceY > 0)
                 {
                     if(Mathf.Abs(touchDifferenceY) < 100f)
                     {
-                        changeValue = - 0.125f;
+                        changeValue = - 0.2f;
                     } else {
-                        changeValue = - 0.225f;
+                        changeValue = - 0.4f;
                     }
                 } else {
                     if (Mathf.Abs(touchDifferenceY) < 100f)
                     {
-                        changeValue = 0.15f;
+                        changeValue = 0.4f;
                     }
                     else
                     {
-                        changeValue = 0.35f;
+                        changeValue = 1f;
                     }
                 }
 
@@ -156,7 +157,7 @@ public class InputController : MonoBehaviour
                 // Change every 10 frames and duration of pitch change is 1/6  from that value
                 if (Time.frameCount % 10 == 0)
                 {
-                    audio2.DOPitch(1.1f + (changeValue * 0.2f), 0.167f);
+                    audio2.DOPitch(1f + (changeValue * 0.2f), 0.167f);
                 }
 
 

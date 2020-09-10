@@ -15,7 +15,7 @@ public class PieceScript : MonoBehaviour
     public float changeValueX;
     public float changeValueY;
 
-    float defaultSpeed = -0.375f;
+    float defaultSpeed = -1f;
 
     // Start is called before the first frame update
     void Start()
